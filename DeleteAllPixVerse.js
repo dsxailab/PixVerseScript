@@ -13,30 +13,33 @@
 
 (function() {
     'use strict';
-    function start(){
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    async function start() {
         const selectBtn = document.getElementsByClassName("text-text-secondary text-sm flex")[0];
         selectBtn.click();
 
-        setTimeout(() => {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                //realClick(checkbox);
-                checkbox.click();
+        await sleep(3000);
 
-                // Optional: dispatch a change event in case something listens for it
-                checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-            });
-            const delButton = document.getElementsByClassName("text-text-secondary text-sm flex")[0];
-            delButton.click();
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            //realClick(checkbox);
+            checkbox.click();
 
-            setTimeout(() => {
-                console.log("confirming");
-                const confirm = document.getElementsByClassName('ant-btn ant-btn-dangerous')[0];
-                confirm.click();
+            // Optional: dispatch a change event in case something listens for it
+            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        const delButton = document.getElementsByClassName("text-text-secondary text-sm flex")[0];
+        delButton.click();
 
-                setTimeout(() => start(), 3000);
-            }, 1000);
-        },3000);
+        await sleep(1000);
+        
+        console.log("confirming");
+        const confirm = document.getElementsByClassName('ant-btn ant-btn-dangerous')[0];
+        confirm.click();
+
+        setTimeout(() => start(), 3000);        
     }
      // Create a container div for the toolbar
     const bar = document.createElement('div');
