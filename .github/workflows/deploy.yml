@@ -15,8 +15,8 @@ jobs:
       - name: Copy script to output dir
         run: |
           mkdir -p public
-          cp DeleteAllPixVerse.js public/
-          cp DeleteAllPixVerse.js public/my-script.meta.js  # Tampermonkey needs .meta.js
+          cp *.user.js public/
+          cp DeleteAllPixVerse.user.js public/my-script.meta.js  # Tampermonkey needs .meta.js
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
