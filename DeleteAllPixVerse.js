@@ -7,6 +7,8 @@
 // @match        https://app.pixverse.ai/asset/video
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixverse.ai
 // @grant        none
+// @updateURL    https://dsxailab.github.io/PixVerseScript/DeleteAllPixVerse.js
+// @downloadURL  https://dsxailab.github.io/PixVerseScript/DeleteAllPixVerse.js
 // ==/UserScript==
 
 (function() {
