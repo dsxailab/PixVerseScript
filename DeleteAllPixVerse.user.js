@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteAllPixVerse
 // @namespace    http://tampermonkey.net/
-// @version      2025-05-20
+// @version      2025-06-20
 // @description  try to take over the world!
 // @author       You
 // @match        https://app.pixverse.ai/asset/video
@@ -17,7 +17,7 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     async function start() {
-        const selectBtn = document.getElementsByClassName("text-text-secondary text-sm flex")[0];
+        const selectBtn = Array.from(document.querySelectorAll('span.text-sm')).find(el => el.textContent.trim() === 'Select');
         selectBtn.click();
 
         await sleep(3000);
@@ -30,7 +30,7 @@
             // Optional: dispatch a change event in case something listens for it
             checkbox.dispatchEvent(new Event('change', { bubbles: true }));
         });
-        const delButton = document.getElementsByClassName("text-text-secondary text-sm flex")[0];
+        const delButton = Array.from(document.querySelectorAll('span.text-sm')).find(el => el.textContent.trim() === 'Delete');
         delButton.click();
 
         await sleep(1000);
