@@ -17,7 +17,8 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     async function start() {
-        const selectBtn = Array.from(document.querySelectorAll('span.text-sm')).find(el => el.textContent.trim() === 'Select');
+        const toolbarQuery = "div.ant-tabs button div.shrink-0";
+        const selectBtn = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Select');
         selectBtn.click();
 
         await sleep(3000);
@@ -30,7 +31,7 @@
             // Optional: dispatch a change event in case something listens for it
             checkbox.dispatchEvent(new Event('change', { bubbles: true }));
         });
-        const delButton = Array.from(document.querySelectorAll('span.text-sm')).find(el => el.textContent.trim() === 'Delete');
+        const delButton = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Delete');
         delButton.click();
 
         await sleep(1000);
