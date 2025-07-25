@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteAllPixVerse
 // @namespace    http://tampermonkey.net/
-// @version      2025-07-25
+// @version      2025.7.25.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://app.pixverse.ai/asset/video
@@ -37,7 +37,7 @@
         await sleep(1000);
         
         console.log("confirming");
-        const confirm = document.querySelectorAll("#radix-\\:r1cg\\: button")[1]
+        const confirm = document.querySelectorAll("div[role='dialog'][data-state='open'] button")[1];
         confirm.click();
 
         setTimeout(() => start(), 3000);        
