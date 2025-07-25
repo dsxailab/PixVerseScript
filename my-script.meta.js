@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteAllPixVerse
 // @namespace    http://tampermonkey.net/
-// @version      2025-07-02
+// @version      2025-07-25
 // @description  try to take over the world!
 // @author       You
 // @match        https://app.pixverse.ai/asset/video
