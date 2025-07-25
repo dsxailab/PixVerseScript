@@ -37,7 +37,7 @@
         await sleep(1000);
         
         console.log("confirming");
-        const confirm = document.getElementsByClassName('ant-btn ant-btn-dangerous')[0];
+        const confirm = document.querySelectorAll("#radix-\\:r1cg\\: button")[1]
         confirm.click();
 
         setTimeout(() => start(), 3000);        
