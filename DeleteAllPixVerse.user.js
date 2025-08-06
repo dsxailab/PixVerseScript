@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteAllPixVerse
 // @namespace    http://tampermonkey.net/
-// @version      2025.7.25.1
+// @version      2025.8.6.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://app.pixverse.ai/asset/video
@@ -17,7 +17,7 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     async function start() {
-        const toolbarQuery = "div.ant-tabs button div.shrink-0";
+        const toolbarQuery = "button div.shrink-0";
         const selectBtn = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Select');
         selectBtn.click();
 
