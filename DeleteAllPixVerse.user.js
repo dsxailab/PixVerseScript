@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteAllPixVerse
 // @namespace    http://tampermonkey.net/
-// @version      2025.8.6.1
+// @version      2025.10.1.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://app.pixverse.ai/asset/video
@@ -18,6 +18,22 @@
     }
     async function start() {
         const toolbarQuery = "button div.shrink-0";
+        document.getElementsByTagName("video")[0].click();
+        await sleep(1000);
+
+        const delButton = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Delete');
+        delButton.click();
+
+        await sleep(1000);
+
+        console.log("confirming");
+        const confirm = document.querySelectorAll("div[role='dialog'][data-state='open'] button")[1];
+        confirm.click();
+
+        await sleep(2000);
+
+        start();
+        /*
         const selectBtn = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Select');
         selectBtn.click();
 
@@ -35,12 +51,12 @@
         delButton.click();
 
         await sleep(1000);
-        
+
         console.log("confirming");
         const confirm = document.querySelectorAll("div[role='dialog'][data-state='open'] button")[1];
         confirm.click();
 
-        setTimeout(() => start(), 3000);        
+        setTimeout(() => start(), 3000);*/
     }
      // Create a container div for the toolbar
     const bar = document.createElement('div');
