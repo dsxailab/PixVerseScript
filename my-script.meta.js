@@ -18,6 +18,7 @@
     }
     async function start() {
         const toolbarQuery = "button div.shrink-0";
+        /*
         document.getElementsByTagName("video")[0].click();
         await sleep(1000);
 
@@ -33,7 +34,7 @@
         await sleep(2000);
 
         start();
-        /*
+        */
         const selectBtn = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Select');
         selectBtn.click();
 
@@ -56,7 +57,7 @@
         const confirm = document.querySelectorAll("div[role='dialog'][data-state='open'] button")[1];
         confirm.click();
 
-        setTimeout(() => start(), 3000);*/
+        setTimeout(() => start(), 3000);//*/
     }
      // Create a container div for the toolbar
     const bar = document.createElement('div');
