@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteAllPixVerse
 // @namespace    http://tampermonkey.net/
-// @version      2025.11.6.1
+// @version      2025.11.15.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://app.pixverse.ai/asset/video
@@ -16,6 +16,7 @@
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
     async function start() {
         const toolbarQuery = "button div.shrink-0";
         /*
@@ -40,17 +41,16 @@
 
         await sleep(3000);
 
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const checkboxes = document.querySelectorAll('button[role="checkbox"]');
         checkboxes.forEach(checkbox => {
-            //realClick(checkbox);
             checkbox.click();
 
             // Optional: dispatch a change event in case something listens for it
             checkbox.dispatchEvent(new Event('change', { bubbles: true }));
         });
+        await sleep(100); // give ui chance to update the checkbox states
         const delButton = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Delete');
         delButton.click();
-
         await sleep(1000);
 
         console.log("confirming");
