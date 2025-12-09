@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteRunComfy
 // @namespace    http://tampermonkey.net/
-// @version      2025.12.9.1
+// @version      2025.12.9.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.runcomfy.com/playground/assets
@@ -17,49 +17,30 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async function start() {
-        const toolbarQuery = "button div.shrink-0";
-        /*
-        document.getElementsByTagName("video")[0].click();
-        await sleep(1000);
-
-        const delButton = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Delete');
-        delButton.click();
-
-        await sleep(1000);
-
-        console.log("confirming");
-        const confirm = document.querySelectorAll("div[role='dialog'][data-state='open'] button")[1];
-        confirm.click();
-
-        await sleep(2000);
-
-        start();
-        */
-        const selectBtn = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Select');
-        selectBtn.click();
-
-        await sleep(3000);
-
-        const checkboxes = document.querySelectorAll('button[role="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.click();
-
-            // Optional: dispatch a change event in case something listens for it
-            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-        });
-        await sleep(100); // give ui chance to update the checkbox states
-        const delButton = Array.from(document.querySelectorAll(toolbarQuery)).find(el => el.textContent.trim() === 'Delete');
-        delButton.click();
-        await sleep(1000);
-
-        console.log("confirming");
-        const confirm = document.querySelectorAll("div[role='dialog'][data-state='open'] button")[1];
-        confirm.click();
-
-        setTimeout(() => start(), 3000);//*/
+    async function scrollToBottom(){
+        const div = document.querySelector('div[data-radix-scroll-area-viewport]');
+        let scrollHeight = 0;
+        while(scrollHeight != div.scrollHeight){
+            scrollHeight = div.scrollHeight;
+            div.scrollTo({
+                top: div.scrollHeight
+            });
+            await sleep(1000);
+        }
     }
-     // Create a container div for the toolbar
+
+    async function start() {
+        await scrollToBottom();
+        const deleteBtns = Array.from(document.querySelectorAll('button[aria-label="Delete asset"]')).slice(500).reverse();
+        for(const btn of deleteBtns){
+            btn.click();
+            await sleep(500);
+            const confirmBtn = Array.from(document.querySelectorAll("button.ring-offset-background")).find(x => x.textContent == "Yes, delete forever");
+            confirmBtn.click();
+            await sleep(1000);
+        }
+    }
+    // Create a container div for the toolbar
     const bar = document.createElement('div');
     bar.style.marginTop = '140px';
     bar.style.marginLeft = '150px'
@@ -75,7 +56,7 @@
 
 
     const button = document.createElement('button');
-    button.textContent = '✔️ Delete All';
+    button.textContent = '✔️ Delete Old Video';
     button.style.position = 'fixed';
     button.style.top = '250px';
     button.style.right = '20px';
