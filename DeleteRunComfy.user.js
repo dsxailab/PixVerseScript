@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteRunComfy
 // @namespace    http://tampermonkey.net/
-// @version      2025.12.9.3
+// @version      2025.12.14.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.runcomfy.com/playground/assets
@@ -31,7 +31,9 @@
 
     async function start() {
         await scrollToBottom();
-        const deleteBtns = Array.from(document.querySelectorAll('button[aria-label="Delete asset"]')).slice(500).reverse();
+        const allDeleteBtns = Array.from(document.querySelectorAll('button[aria-label="Delete asset"]'));
+        console.log(`all delete buttons found ${allDeleteBtns.length}`);
+        const deleteBtns = allDeleteBtns.slice(500).reverse();
         for(const btn of deleteBtns){
             btn.click();
             await sleep(500);
