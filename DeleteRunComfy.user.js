@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         DeleteRunComfy
 // @namespace    http://tampermonkey.net/
-// @version      2025.12.14.3
+// @version      2026.5.24.3
 // @description  try to take over the world!
 // @author       You
-// @match        https://www.runcomfy.com/playground/assets
+// @match        https://www.runcomfy.com/models/assets
 // @icon         https://www.runcomfy.com/_next/image?url=%2Fassets%2Fimages%2Flogo.png&w=256&q=75
 // @grant        none
 // @updateURL    https://dsxailab.github.io/PixVerseScript/DeleteRunComfy.user.js
