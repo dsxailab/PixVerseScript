@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteRunComfy
 // @namespace    http://tampermonkey.net/
-// @version      2026.5.24.3
+// @version      2026.5.24.4
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.runcomfy.com/models/assets
@@ -9,6 +9,7 @@
 // @grant        none
 // @updateURL    https://dsxailab.github.io/PixVerseScript/DeleteRunComfy.user.js
 // @downloadURL  https://dsxailab.github.io/PixVerseScript/DeleteRunComfy.user.js
+// @run-at       document-idle
 // ==/UserScript==
 
 (function() {
@@ -20,20 +21,30 @@
     async function scrollToBottom(){
         const div = document.querySelector('div[data-radix-scroll-area-viewport]');
         let scrollHeight = 0;
-        while(scrollHeight != div.scrollHeight){
+        let gridHeight = 0;
+        const minHeight = 80000
+        const grid = document.querySelector(".grid.gap-4");
+
+        while(scrollHeight != div.scrollHeight && gridHeight < minHeight){
             scrollHeight = div.scrollHeight;
             div.scrollTo({
                 top: div.scrollHeight
             });
             await sleep(1000);
+            gridHeight = parseInt(grid.firstChild.style.height, 10);
         }
+
+        return gridHeight> minHeight;
     }
 
     async function start() {
-        await scrollToBottom();
+        const hasItems = await scrollToBottom();
+        if(!hasItems) return;
         const allDeleteBtns = Array.from(document.querySelectorAll('button[aria-label="Delete asset"]'));
         console.log(`all delete buttons found ${allDeleteBtns.length}`);
-        const deleteBtns = allDeleteBtns.slice(500).reverse();
+        const deleteBtns = allDeleteBtns
+          //.slice(500)
+          .reverse();
         for(const btn of deleteBtns){
             btn.click();
             await sleep(500);
@@ -41,6 +52,8 @@
             confirmBtn.click();
             await sleep(1000);
         }
+
+        start();
     }
     // Create a container div for the toolbar
     const bar = document.createElement('div');
