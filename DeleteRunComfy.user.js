@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteRunComfy
 // @namespace    http://tampermonkey.net/
-// @version      2026.5.24.4
+// @version      2026.5.24.5
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.runcomfy.com/models/assets
@@ -12,7 +12,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 
-(function() {
+(async function() {
     'use strict';
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -59,7 +59,7 @@
     const bar = document.createElement('div');
     bar.style.marginTop = '140px';
     bar.style.marginLeft = '150px'
-    bar.style.position = 'relative';
+    bar.style.position = 'absolute';
     bar.style.width = '50%';
     bar.style.background = '#28a74500';
     bar.style.color = 'white';
@@ -91,6 +91,7 @@
 
     // Add the button to the bar and the bar to the top of the body
     bar.appendChild(button);
+    await sleep(1000);
     document.body.insertBefore(bar, document.body.firstChild);
 
 })();
