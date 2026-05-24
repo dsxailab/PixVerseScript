@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeleteRunComfy
 // @namespace    http://tampermonkey.net/
-// @version      2026.5.24.5
+// @version      2026.5.24.6
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.runcomfy.com/models/assets
@@ -91,7 +91,7 @@
 
     // Add the button to the bar and the bar to the top of the body
     bar.appendChild(button);
-    await sleep(1000);
+    await sleep(5000);
     document.body.insertBefore(bar, document.body.firstChild);
 
 })();
